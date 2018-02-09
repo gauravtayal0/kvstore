@@ -3,6 +3,7 @@ Key value in memory store in golang
 
 # Usage
 
+```go
 package main
 
 import (
@@ -24,3 +25,4 @@ func main() {
 	#delete key function usage
 	kvs.Delete("test")
 }
+```
