@@ -42,3 +42,12 @@ func (ds *DataStore) GetValue(key string) (string, bool) {
 func (ds *DataStore) Delete(key string) {
 	delete(ds.m, key)
 }
+
+// Exists checks for the existence of key in the store.
+func (ds *DataStore) Exists(key string) bool {
+	_, err := ds.Get(key)
+	if err != nil {
+		return false
+	}
+	return true
+}
