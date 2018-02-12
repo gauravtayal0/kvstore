@@ -29,6 +29,7 @@ func (ds *DataStore) Get(key string) (KV, bool) {
 	ds.mux.RLock()
 	kvpair, ok := ds.m[key]
 	ds.mux.RUnlock()
+
 	return kvpair, ok
 }
 
@@ -36,6 +37,7 @@ func (ds *DataStore) GetValue(key string) (string, bool) {
 	ds.mux.RLock()
 	kv, ok := ds.m[key]
 	ds.mux.RUnlock()
+
 	return kv.Value, ok
 }
 
@@ -45,9 +47,10 @@ func (ds *DataStore) Delete(key string) {
 
 // Exists checks for the existence of key in the store.
 func (ds *DataStore) Exists(key string) bool {
-	_, err := ds.Get(key)
-	if err != nil {
-		return false
+	_, ok := ds.Get(key)
+
+	if ok {
+		return true
 	}
-	return true
+	return false
 }
